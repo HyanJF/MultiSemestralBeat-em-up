@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 361691107959628903}
   - component: {fileID: 7140085619150063032}
   - component: {fileID: 5879372501906757290}
-  - component: {fileID: 7473451187393375218}
   - component: {fileID: -6348449181648740416}
   m_Layer: 0
   m_Name: Player
@@ -159,6 +158,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5879372501906757290}
+  - {fileID: -6348449181648740416}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &5879372501906757290
 MonoBehaviour:
@@ -177,60 +177,6 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
---- !u!114 &7473451187393375218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336529763743634332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: fbdec5f89062e7b42ab79ebad1d21ad7, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -6348449181648740416}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4dd17dd2-ec90-41e9-bf66-463287dff8ae
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bf4b2287-9fdb-4186-bb39-a5eb2f51a72e
-    m_ActionName: 'Player/Look[/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b0853422-abbf-4c0a-8333-c9506038324f
-    m_ActionName: 'Player/Hit[/Mouse/leftButton]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 4688536189507344731}
 --- !u!114 &-6348449181648740416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +192,17 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 10
   gravity: -9.81
-  mouseSensitivity: 2
-  verticalClamp: 30
+  inputActions:
+    m_Name: Input Actions
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5fbca22c-c5ac-47b6-b63d-2305b073f1f3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mouseSensitivity: 1
+  verticalClamp: 5
   cameraPlayer: {fileID: 8219766130511843766}
 --- !u!1 &3172398556016709014
 GameObject:
@@ -275,13 +230,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3172398556016709014}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64, y: 1.32, z: -1.65}
+  m_LocalRotation: {x: 0.14722627, y: -0, z: -0, w: 0.9891029}
+  m_LocalPosition: {x: 0.78, y: 4.04, z: -5.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6533704102720598848}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.932, y: 0, z: 0}
 --- !u!20 &4688536189507344731
 Camera:
   m_ObjectHideFlags: 0

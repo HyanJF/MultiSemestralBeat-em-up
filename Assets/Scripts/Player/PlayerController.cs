@@ -1,7 +1,9 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     #region Parameters
 
@@ -10,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 10f;
     public float gravity = -9.81f;
     private float currentSpeed;
+    public PlayerSystem inputActions;
 
     [Header("Camera")]
     public float mouseSensitivity = 2f;
@@ -22,26 +25,34 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private Vector3 moveDirection;
     private float verticalRotation = 0f;
-
-
-
     #endregion
 
-    private void Start()
+    private void Awake()
     {
+        inputActions = new PlayerSystem();
+        inputActions.Player.Enable();
         TryGetComponent(out controller);
         currentSpeed = walkSpeed;
 
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
         //Move
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-        moveDirection = move * currentSpeed;
-        controller.Move(moveDirection * Time.deltaTime);
+        InputSystem.Update();
+        Vector2 moveInput = inputActions.Player.Move.ReadValue<Vector2>();
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+
+        controller.Move(move * Runner.DeltaTime * currentSpeed);
+
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
 
         //Cámara
+        Vector2 lookInput = inputActions.Player.Look.ReadValue<Vector2>();
+
         float mouseX = lookInput.x * mouseSensitivity;
         float mouseY = lookInput.y * mouseSensitivity;
         verticalRotation -= mouseY;
@@ -49,14 +60,5 @@ public class PlayerController : MonoBehaviour
         cameraPlayer.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
-
-    #region Input System
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
-
-    #endregion
 
 }
